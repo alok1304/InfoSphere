@@ -46,7 +46,6 @@ git clone https://github.com/yourusername/infosphere.git
 
 ```
 pip install -r requirements.txt
-Run the migrations:
 ```
 
 3. Run migrations:
