@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Search Results
+{% endblock %}
+
+{% block content %}
+    <h2>Search Results</h2>
+
+{% if results %}
+    <p>Showing results for: "{{ query }}"</p>
+    <ul>
+        {% for tweet in results %}
+            <li>
+                <strong>{{ tweet.user.username }}</strong>: {{ tweet.text }}
+                <br>
+                <img src="{{ tweet.photo.url }}" alt="Tweet Image" style="max-width: 100px;">
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No results found for "{{ query }}"</p>
+{% endif %}
+<a href="{% url 'tweet_list' %}" class="btn btn-secondary mt-3">Back to Tweets</a>
+
+{% endblock %}

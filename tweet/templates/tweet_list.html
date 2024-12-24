@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Tweet
+{% endblock %}
+
+{% block script %}
+<script>
+function vote(tweetId, type) {
+    const url = `/${type}/${tweetId}/`;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                alert(errorData.error); // Show error message to the user
+                throw new Error(errorData.error);
+            });
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Update both upvote and downvote counts
+        document.getElementById(`upvotes-${tweetId}`).innerText = data.upvotes;
+        document.getElementById(`downvotes-${tweetId}`).innerText = data.downvotes;
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+{% endblock %}
+
+{% block content %}
+  <h1>🌟 Welcome to InfoSphere! 🌟</h1>
+
+  <a class='btn btn-primary mb-4' href="{% url "tweet_create" %}"> Create a tweet</a>
+
+  <div class="container row gap-3">
+    {% for tweet in tweets %}
+         <div class="card" style="width: 18rem;">
+  <img src="{{tweet.photo.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{tweet.user.username}}</h5>
+    <p class="card-text">{{tweet.text}}</p>
+
+   <div class="mb-4">
+        
+        <!-- Upvote Button -->
+        <div class="mb-1">
+          <button class="btn btn-success" onclick="vote({{ tweet.id }}, 'upvote')">👍 Upvote</button>
+        <span id="upvotes-{{ tweet.id }}">{{ tweet.upvotes }}</span>
+        </div>
+
+        <!-- Downvote Button -->
+        <div class="mb-2">
+          <button class="btn btn-danger" onclick="vote({{ tweet.id }}, 'downvote')">👎 Downvote</button>
+        <span id="downvotes-{{ tweet.id }}">{{ tweet.downvotes }}</span>
+        </div>
+
+
+      {% if user.is_authenticated %}
+      {% else %}
+          <div>
+            <p><a href="{% url 'login' %} " class="btn btn-primary">Log in to vote.</a> </p>
+          </div>
+      {% endif %}
+
+    </div>
+
+    {% if tweet.user == user %}
+    <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+    {% endif %}
+  </div>
+</div>
+    {% endfor %}
+  </div>
+
+
+{% endblock  %}

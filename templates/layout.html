@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <title>
+        {% block title %}
+        InfoSphere
+        {% endblock %}
+    </title>
+    
+    {% block script %}
+
+    {% endblock %}
+    
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body >
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" >
+  <div class="container-fluid">
+    <a style="color:black" class="navbar-brand" href="{% url "tweet_list" %}"><strong>InfoSphere</strong></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="background-color: coral;">
+      <span class="navbar-toggler-icon"></span> CLICK
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url "news_view" %}">News</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url "joke_view" %}">Jokes</a>
+        </li>
+       
+    
+      </ul>
+
+      <form class="d-flex"  method="get" role="search"  action="{% url "search_tweets" %}">
+        <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" value="{{ query|default_if_none:'' }}">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+      <a href="{% url "tweet_list" %}" class="btn btn-primary mx-2">Home</a>
+      {% if user.is_authenticated %}
+      <form method="post" action="{% url "logout" %}">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Logout</button>
+      </form>
+      {% else %}
+        <a href="{% url "register" %}" class="btn btn-primary mx-2">Register</a>
+        <a href="{% url "login" %}" class="btn btn-success mx-2">Login</a>
+      {% endif %}
+
+    </div>
+  </div>
+</nav>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+</body>
+</html>

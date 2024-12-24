@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    News Updates
+{% endblock %}
+
+{% block content %}
+
+ <h1>Breaking News</h1>
+    <form method="get">
+        <input type="text" name="query" placeholder="Search news" value="{{ request.GET.query }}">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for article in articles %}
+        <li>
+            <h2><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h2>
+            <p>{{ article.description }}</p>
+            <img src="{{ article.urlToImage }}" alt="news Image" style="max-width: 400px;"> <br>
+            <small>Published at: {{ article.publishedAt }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

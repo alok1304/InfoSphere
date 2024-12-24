@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Jokes Section
+{% endblock %}
+
+{% block content %}
+    <h1>Random Joke</h1>
+    <p>{{ joke }}</p>
+    <form method="get">
+        <button type="submit" class="btn btn-primary">Get Another Joke</button>
+    </form>
+{% endblock %}
