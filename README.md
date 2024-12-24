@@ -62,3 +62,7 @@ Open your browser and go to:
 http://127.0.0.1:8000/
 ```
 
+## Contact
+Feel free to reach out to me with any questions or feedback at:
+- Email: [alokkumarjipura9973@gmail.com]
+- GitHub: [https://github.com/alok1304]
