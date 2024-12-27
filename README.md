@@ -61,6 +61,26 @@ Open your browser and go to:
 http://127.0.0.1:8000/
 ```
 
+## Running the InfoSphere Project with Docker
+1. Clone the repository:
+
+```
+git clone https://github.com/yourusername/infosphere.git
+```
+2. Run the following command to build and start the containers:
+```
+docker-compose up --build
+```
+
+3. Open your browser and go to:
+```
+http://localhost:8001/
+```
+4. This will build the Docker images and start the application. You can stop it anytime with CTRL+C and remove containers using:
+```
+docker-compose down
+```
+
 ## Contact
 Feel free to reach out to me with any questions or feedback at:
 - Email: [alokkumarjipura9973@gmail.com]
