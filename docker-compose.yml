@@ -1,0 +1,10 @@
+name: InfoSphere
+
+services:
+  app:
+    image: my-docker-image
+    container_name: my-docker-container_name
+    ports:
+      - "8001:8000"
+    volumes:
+      - .:/app
