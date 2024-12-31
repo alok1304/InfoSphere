@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from .utils import fetch_news, fetch_random_joke
 from django.http import JsonResponse
+from better_profanity import profanity
 
 # Create your views here.
 def index(request):
@@ -22,10 +23,16 @@ def tweet_create(request):
     if request.method == 'POST':
         form = TweetForm(request.POST,request.FILES)
         if form.is_valid():
-            tweet= form.save(commit=False)
-            tweet.user=request.user
-            tweet.save()
-            return redirect('tweet_list')
+            text = form.cleaned_data['text']
+
+            # Check for offensive language
+            if profanity.contains_profanity(text):
+                form.add_error('text', 'Your tweet contains inappropriate language.')
+            else:
+                tweet = form.save(commit=False)
+                tweet.user = request.user
+                tweet.save()
+                return redirect('tweet_list')
         
     else:
         form=TweetForm()

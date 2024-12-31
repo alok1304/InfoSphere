@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Edit
+Tweet
 {% endblock %}
 
 {% block content %}
-  <h1>welcome to Form.</h1>
+
   <h2>
     {%if form.instance.pk %}
     Edit Tweet
@@ -16,7 +16,10 @@ Edit
     <form method="post" enctype="multipart/form-data" class='form'>
       {% csrf_token %}
         {{form.as_p}}
-        <button class='btn btn-warning' type='submit'>Submit</button>
+        {% for error in form.non_field_errors %}
+        <div class="error">{{ error }}</div>
+        {% endfor %}
+        <button class='btn btn-warning' type='submit'>Post Tweet</button>
 
     </form>
     <a href="{%url 'tweet_list' %}">Back to Tweet List</a>

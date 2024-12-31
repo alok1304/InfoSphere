@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from better_profanity import profanity
 
 # Create your models here.
 
@@ -11,6 +12,11 @@ class Tweet(models.Model):
     updated_at=models.DateTimeField(auto_now=True)
     upvotes = models.PositiveIntegerField(default=0)  # New field
     downvotes = models.PositiveIntegerField(default=0)  # New field
+
+    def save(self, *args, **kwargs):
+        # Censor offensive words in the tweet text
+        self.text = profanity.censor(self.text)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.user.username} - {self.text[:10]}'
