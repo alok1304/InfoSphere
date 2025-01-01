@@ -7,6 +7,9 @@ from django.contrib.auth import login
 from .utils import fetch_news, fetch_random_joke
 from django.http import JsonResponse
 from better_profanity import profanity
+import openai
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 def index(request):
@@ -150,3 +153,32 @@ def downvote_tweet(request, tweet_id):
             tweet.save()
 
         return JsonResponse({"upvotes": tweet.upvotes, "downvotes": tweet.downvotes})
+
+
+# OpenAI API key
+openai.api_key = 'Your_api_key'
+
+@csrf_exempt
+def chatbot(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user_message = data.get('message', '')
+
+        if user_message:
+            try:
+                # Generate response using OpenAI API
+                response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=[{"role": "user", "content": user_message}]
+                )
+                bot_reply = response['choices'][0]['message']['content']
+                return JsonResponse({'reply': bot_reply})
+            except Exception as e:
+                return JsonResponse({'error': str(e)}, status=500)
+        else:
+            return JsonResponse({'error': 'No message provided'}, status=400)
+    elif request.method == 'GET':
+        # Render the chatbot HTML page
+        return render(request, "chatbot.html")
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=405)

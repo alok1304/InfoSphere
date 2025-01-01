@@ -12,4 +12,5 @@ urlpatterns = [
     path('jokes/', views.joke_view,name='joke_view'),
     path('upvote/<int:tweet_id>/', views.upvote_tweet, name='upvote_tweet'),
     path('downvote/<int:tweet_id>/', views.downvote_tweet, name='downvote_tweet'),
+    path('chatbot/', views.chatbot, name='chatbot'),
 ]

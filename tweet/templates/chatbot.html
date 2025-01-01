@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}
+chatbot
+{% endblock %}
+
+{% block content %}
+    <h1>Chat Bot</h1>
+
+<div style="max-width: 600px; margin: auto; text-align: center;">
+    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #f9f9f9;">
+        <div id="chatbox" style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 8px; margin-bottom: 12px; background: white;">
+            <!-- Chat messages will be displayed here -->
+        </div>
+
+        <textarea id="userMessage" 
+                  placeholder="Type your message here..." 
+                  style="width: 100%; height: 60px; padding: 8px; margin-bottom: 8px; border-radius: 4px; border: 1px solid #ddd;"></textarea>
+        
+        <button onclick="sendMessage()" 
+                style="padding: 10px 20px; background: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            Send
+        </button>
+    </div>
+</div>
+
+<script>
+    async function sendMessage() {
+        const chatbox = document.getElementById("chatbox");
+        const userMessageInput = document.getElementById("userMessage");
+        const userMessage = userMessageInput.value.trim();
+
+        if (!userMessage) {
+            alert("Please enter a message.");
+            return;
+        }
+
+        // Display user message
+        const userMessageHTML = `<div style="text-align: right; margin-bottom: 8px;">
+                                    <span style="display: inline-block; padding: 8px; background: #007BFF; color: white; border-radius: 8px; max-width: 70%;">
+                                        ${userMessage}
+                                    </span>
+                                  </div>`;
+        chatbox.innerHTML += userMessageHTML;
+        chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll to the latest message
+        userMessageInput.value = ""; // Clear input
+
+        // Send user message to server
+        try {
+            const response = await fetch("/chatbot/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ message: userMessage }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const botReplyHTML = `<div style="text-align: left; margin-bottom: 8px;">
+                                        <span style="display: inline-block; padding: 8px; background: #e0e0e0; border-radius: 8px; max-width: 70%;">
+                                            ${data.reply}
+                                        </span>
+                                      </div>`;
+                chatbox.innerHTML += botReplyHTML;
+                chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll to the latest message
+            } else {
+                const errorData = await response.json();
+                alert(errorData.error || "An error occurred while processing your message.");
+            }
+        } catch (error) {
+            alert("Failed to connect to the server. Please try again.");
+        }
+    }
+</script>
+    
+{% endblock %}

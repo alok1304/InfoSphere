@@ -10,12 +10,18 @@ InfoSphere is a mini social platform built with Python, Django, and Bootstrap, a
 - Random Jokes: Enjoy a dose of humor with daily jokes.
 - Search Functionality: Easily search for posts, users, and topics of interest.
 - Responsive Design: Optimized for both desktop and mobile devices.
+- Profanity Filter: Added a profanity filter to automatically detect and block offensive language in tweets, ensuring a safe and respectful experience for all users.
   
 ## Tech Stack
 - Backend: Python, Django
 - Frontend: HTML, CSS, Bootstrap
 - Database: SQLite (can be expanded to other databases)
 - Authentication: Django's built-in authentication system
+- Third-Party Libraries:
+    - `better_profanity`: A library for filtering offensive language in user posts.
+- External APIs:
+    - News API: Provides real-time news updates on various topics.
+    - JokeAPI: Delivers random jokes for entertainment.
   
 ## Home page
 ![Screenshot 2024-12-25 014338](https://github.com/user-attachments/assets/21ac2c08-30a1-4a4e-b9a2-a5fac0495bf3)
