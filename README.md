@@ -11,6 +11,7 @@ InfoSphere is a mini social platform built with Python, Django, and Bootstrap, a
 - Search Functionality: Easily search for posts, users, and topics of interest.
 - Responsive Design: Optimized for both desktop and mobile devices.
 - Profanity Filter: Added a profanity filter to automatically detect and block offensive language in tweets, ensuring a safe and respectful experience for all users.
+- Chatbot: A real-time conversational chatbot powered by GPT-3.5.
   
 ## Tech Stack
 - Backend: Python, Django
@@ -24,7 +25,8 @@ InfoSphere is a mini social platform built with Python, Django, and Bootstrap, a
     - JokeAPI: Delivers random jokes for entertainment.
   
 ## Home page
-![Screenshot 2024-12-25 014338](https://github.com/user-attachments/assets/21ac2c08-30a1-4a4e-b9a2-a5fac0495bf3)
+![Screenshot 2025-01-01 201740](https://github.com/user-attachments/assets/c4972fa4-9a97-4678-bf0c-05b6c77ba52c)
+
 
 ## News section
 ![Screenshot 2024-12-25 014436](https://github.com/user-attachments/assets/e38ab664-2a69-4a18-8c08-3c89cfff9eb8)
