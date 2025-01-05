@@ -47,7 +47,8 @@ To run InfoSphere locally, follow the steps below:
 1. Clone the repository:
 
 ```
-git clone https://github.com/yourusername/infosphere.git
+git clone https://github.com/alok1304/InfoSphere.git
+cd InfoSphere
 ```
 
 2. Install the required dependencies:
@@ -73,7 +74,7 @@ http://127.0.0.1:8000/
 1. Clone the repository:
 
 ```
-git clone https://github.com/yourusername/infosphere.git
+git clone https://github.com/alok1304/InfoSphere.git
 ```
 2. Run the following command to build and start the containers:
 ```
