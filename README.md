@@ -49,6 +49,8 @@ To run InfoSphere locally, follow the steps below:
 ```
 git clone https://github.com/alok1304/InfoSphere.git
 cd InfoSphere
+py -m venv venv
+venv\Scripts\activate
 ```
 
 2. Install the required dependencies:
