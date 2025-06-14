@@ -26,7 +26,8 @@ InfoSphere is a mini social platform built with Python, Django, and Bootstrap, a
     - JokeAPI: Delivers random jokes for entertainment.
   
 ## Home page
-![Screenshot 2025-01-01 201740](https://github.com/user-attachments/assets/c4972fa4-9a97-4678-bf0c-05b6c77ba52c)
+![Screenshot 2025-06-14 155823](https://github.com/user-attachments/assets/1b20362d-2347-4444-81e8-45eb6bab2d87)
+
 
 
 ## News section
