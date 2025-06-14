@@ -42,9 +42,16 @@ function vote(tweetId, type) {
   <div class="container row gap-3">
     {% for tweet in tweets %}
          <div class="card" style="width: 18rem;">
-  <img src="{{tweet.photo.url}}" class="card-img-top" alt="...">
+  {% if tweet.photo %}
+  <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet image">
+ {% endif %}
   <div class="card-body">
     <h5 class="card-title">{{tweet.user.username}}</h5>
+
+    {% if tweet.is_fake == True  %}
+          <span class="badge bg-primary text-white mb-2">🚩 Fake</span>
+    {% endif %}
+
     <p class="card-text">{{tweet.text}}</p>
 
    <div class="mb-4">
